@@ -26,14 +26,17 @@ public class MainController {
         log.info("received request:" + body);
 
         // GET HEX
-        byte[] hexStringByte = Base64.decode(
-                jsonObject
-                        .getAsJsonObject("service")
-                        .getAsJsonObject("data")
-                        .get("rawData")
-                        .getAsString());
-        String hexString = HexBin.encode(hexStringByte);
-        log.info("hex:" + hexString);
+        JsonObject data = jsonObject
+                .getAsJsonObject("service")
+                .getAsJsonObject("data").getAsJsonObject();
+
+        if (data.get("rawData") != null) {
+            byte[] hexStringByte = Base64.decode(
+                    data.get("rawData")
+                            .getAsString());
+            String hexString = HexBin.encode(hexStringByte);
+            log.info("hex:" + hexString);
+        }
 
         return "ok";
     }
