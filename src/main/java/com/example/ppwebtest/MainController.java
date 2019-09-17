@@ -20,7 +20,12 @@ public class MainController {
         System.out.println(jsonObject);
 
         // GET HEX
-        byte[] hexStringByte = Base64.decode(jsonObject.get("rawData").getAsString());
+        byte[] hexStringByte = Base64.decode(
+                jsonObject
+                        .getAsJsonObject("service")
+                        .getAsJsonObject("data")
+                        .get("rawData")
+                        .getAsString());
         String hexString = HexBin.encode(hexStringByte);
         System.out.println("hex:" + hexString);
 
