@@ -13,6 +13,13 @@ import java.time.LocalDateTime;
 
 @RestController
 public class MainController {
+    @RequestMapping("pptest")
+    public String test1() {
+        System.out.println("pptest");
+
+        return "ok";
+    }
+
     @RequestMapping("**")
     public String test(@RequestBody String body) {
         JsonObject jsonObject = new JsonParser().parse(body).getAsJsonObject();
